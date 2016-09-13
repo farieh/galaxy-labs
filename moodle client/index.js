@@ -10,6 +10,7 @@ moodle_client.init({
     console.log(client);
     //do_something(client);
     do_otherthing(client);
+    get_all_user(client);
 
 
 }).catch(function (err) {
@@ -31,29 +32,57 @@ function get_all_user(client) {
         },
     }).then(function (info) {
         console.log(info);
+        var arraylength = info.users.length;
+        for (var i = 1; i < arraylength; i++) {
+            tableUser = tableUser + '<tr><td>' + info.users[i].id + '</td><td>' + info.users[i].username + '</td><td>' + info.users[i].fullname + '</td><td>' + info.users[i].email + '</td></tr>';
+        };
+
+        $("#table-body").append(tableUser);
     });
 }
 var tableUser;
+
 function do_otherthing(client) {
     client.call({
-        wsfunction: 'core_user_get_users',
+        wsfunction: 'core_user_create_users',
+        method: 'POST',
         args: {
-            criteria: [
+            users: [
                 {
-                    key: 'email',
-                    value: '%%'
-                }
-            ]
+                    username: 'Nunu',
+                    password: 'Nunu',
+                    createpassword: 0,  //True if password should be created and mailed to user.
+                    firstname: 'Nunu',   //The first name(s) of the user
+                    lastname: 'Nana',   //The family name of the user
+                    email: 'nunu@gmail.com',//A valid and unique email address
+                    auth: 'manual',//Auth plugins include manual, ldap, imap, etc
+                    idnumber: '', //An arbitrary ID code number perhaps from the institution
+                    lang: 'eng',//Language code such as "en", must exist on server
+                    calendartype: 'gregorian', //Calendar type such as "gregorian", must exist on server
+                    theme: 'standard', //Theme name such as "standard", must exist on server
+                    timezone: '99',//Timezone code such as Australia/Perth, or 99 for default
+                    mailformat: 1,//Mail format code is 0 for plain text, 1 for HTML etc
+                    description: 'Profile Desciption', //User profile description, no HTML
+                    city: 'Kota', //Home city of the user
+                    country: 'AU', //Home country code of the user, such as AU or CZ
+                    firstnamephonetic: 'as',//The first name(s) phonetically of the user
+                    lastnamephonetic: 'asd',//The family name phonetically of the user
+                    middlename: 'asdasd', //The middle name of the user
+                    alternatename: 'asdasdas',//The alternate name of the user
+                    preferences: [{
+                        type: 'string',  //The name of the preference
+                        value: 'string'   //The value of the preference
+                    }], //User preferences
+                    customfields: [{
+                        type: 'string',
+                        value: 'string'
+                    }]
+                }]
 
         },
     }).then(function (info) {
         console.log(info);
-        var arraylength = info.users.length;
-        for (var i = 1; i < arraylength; i++) {
-            tableUser = tableUser + '<tr><td>'+ info.users[i].id+'</td><td>'+info.users[i].username+'</td><td>'+info.users[i].fullname+'</td><td>'+info.users[i].email+'</td></tr>';
-        };
 
-        $("#table-body").append(tableUser);
     });
 }
 
