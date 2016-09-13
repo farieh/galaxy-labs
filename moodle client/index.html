@@ -1,0 +1,106 @@
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <link rel="stylesheet" type="text/css" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js?ver=1.4.2'></script>
+    <script src="./node_modules/jquery/jquery.min.js"></script>
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="./index.js"></script>
+
+
+</head>
+
+<body>
+    <div id="header" class="container">
+        <div id="title">
+        </div>
+        <div id="menu">
+            <nav class="navbar navbar-inverse">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="#">Manajemen Quiz</a>
+                    </div>
+                    <ul class="nav navbar-nav">
+                        <li><a class="dropdown-toggle" data-toggle="dropdown" href="#">User </a></li>
+                        <li><a class="dropdown-toggle" data-toggle="dropdown" href="#">Course</a></li>
+                        <li><a class="dropdown-toggle" data-toggle="dropdown" href="#">Question</a></li>
+                        <li><a class="dropdown-toggle" data-toggle="dropdown" href="#">Quiz</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <div id="body" class="container-fluid">
+        <div id="manage-user">
+            <div id="view-user">
+                <table class="table">
+                    <thead id="table-head">
+                        <tr>
+                            <th>ID</th>
+                            <th>User Name</th>
+                            <th>Full Name</th>
+                            <th>Email</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-body">
+                    </tbody>
+                </table>
+            </div>
+            <div id="create-user">
+            </div>
+            <div id="edit-user">
+            </div>
+            <div id="delete-user">
+            </div>
+        </div>
+        <div id="manage-course">
+            <div id="view-course">
+            </div>
+            <div id="create-course">
+            </div>
+            <div id="edit-course">
+            </div>
+            <div id="delete-course">
+            </div>
+            <div id="enroll-user">
+            </div>
+        </div>
+        <div id="question">
+            <div id="view-question">
+            </div>
+            <div id="create-question">
+            </div>
+            <div id="edit-question">
+            </div>
+            <div id="delete-question">
+            </div>
+        </div>
+        <div id="quiz">
+            <div id="view-quiz">
+            </div>
+            <div id="create-quiz">
+            </div>
+            <div id="edit-quiz">
+            </div>
+            <div id="delete-quiz">
+            </div>
+        </div>
+    </div>
+    <script>
+
+window.onload = function() {
+    if (window.jQuery) {  
+        // jQuery is loaded  
+        console.log("Yeah!");
+    } else {
+        // jQuery is not loaded
+        console.log("Doesn't Work");
+    }
+}
+
+$("#table-body").append(tableUser);
+    </script>
+</body>
+
+</html>
