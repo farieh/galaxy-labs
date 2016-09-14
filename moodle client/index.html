@@ -33,6 +33,66 @@
     </div>
     <div id="body" class="container-fluid">
         <div id="manage-user">
+
+            <div>
+                <button id="add_user" data-toggle="collapse" data-target="#create-user" class="btn btn-primary">Add User</button>
+            </div>
+            <div id="create-user" class="collapse">
+                <div id="legend">
+                    <legend class="">Add User</legend>
+                </div>
+                <div class="control-group">
+                    <!-- Username -->
+
+                    <div class="controls"><label class="control-label" for="username">Username</label>
+                        <input type="text" id="username" name="username" placeholder="" class="input-xlarge">
+                    </div>
+                </div>
+                <div class="control-group">
+                    <!-- firstname -->
+                    <div class="controls">
+                        <label class="control-label" for="firstname">Firstname</label>
+                        <input type="text" id="firstname" name="firstname" placeholder="" class="input-xlarge">
+                    </div>
+                </div>
+                <div class="control-group">
+                    <!-- lastname -->
+                    <div class="controls">
+                        <label class="control-label" for="lastname">Lastname</label>
+                        <input type="text" id="lastname" name="lastname" placeholder="" class="input-xlarge">
+                    </div>
+                </div>
+                <div class="control-group">
+                    <!-- E-mail -->
+                    <div class="controls">
+                        <label class="control-label" for="email">E-mail</label>
+                        <input type="text" id="email" name="email" placeholder="" class="input-xlarge">
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <!-- Password-->
+                    <div class="controls">
+                        <label class="control-label" for="password">Password</label>
+                        <input type="text" id="password" name="password" placeholder="" class="input-xlarge">
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <!-- Password -->
+                    <div class="controls">
+                        <label class="control-label" for="password_confirm">Password (Confirm)</label>
+                        <input type="text" id="password_confirm" name="password_confirm" placeholder="" class="input-xlarge">
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <!-- Button -->
+                    <div class="controls">
+                        <button id="register" class="btn btn-success">Register</button>
+                    </div>
+                </div>
+            </div>
             <div id="view-user">
                 <table class="table">
                     <thead id="table-head">
@@ -48,50 +108,7 @@
                     </tbody>
                 </table>
             </div>
-            <div id="create-user" class="hide">
 
-                <div id="legend">
-                    <legend class="">Register</legend>
-                </div>
-                <div class="control-group">
-                    <!-- Username -->
-                    <label class="control-label" for="username">Username</label>
-                    <div class="controls">
-                        <input type="text" id="username" name="username" placeholder="" class="input-xlarge">
-                    </div>
-                </div>
-
-                <div class="control-group">
-                    <!-- E-mail -->
-                    <label class="control-label" for="email">E-mail</label>
-                    <div class="controls">
-                        <input type="text" id="email" name="email" placeholder="" class="input-xlarge">
-                    </div>
-                </div>
-
-                <div class="control-group">
-                    <!-- Password-->
-                    <label class="control-label" for="password">Password</label>
-                    <div class="controls">
-                        <input type="text" id="password" name="password" placeholder="" class="input-xlarge">
-                    </div>
-                </div>
-
-                <div class="control-group">
-                    <!-- Password -->
-                    <label class="control-label" for="password_confirm">Password (Confirm)</label>
-                    <div class="controls">
-                        <input type="text" id="password_confirm" name="password_confirm" placeholder="" class="input-xlarge">
-                    </div>
-                </div>
-
-                <div class="control-group">
-                    <!-- Button -->
-                    <div class="controls">
-                        <button class="btn btn-success">Register</button>
-                    </div>
-                </div>
-            </div>
             <div id="edit-user">
             </div>
             <div id="delete-user">
@@ -135,13 +152,33 @@
 window.onload = function() {
     if (window.jQuery) {  
         // jQuery is loaded  
-        console.log("Yeah!");
+        console.log("Yeah! Jquery is work");
     } else {
         // jQuery is not loaded
-        console.log("Doesn't Work");
+        console.log("JQuery Doesn't Work");
     }
 }
 
+moodle_client.init({
+    wwwroot: "http://localhost/moodle/",
+    token: "e7c2eb02d743314e32b3764492004ef7",
+    service: "Administrator"
+
+}).then(function (client) {
+
+$("#register").click(function(){
+    var usrname = $("#username").val();
+    var psword = $("#password").val();
+    var fsname = $("#firstname").val();
+    var lsname = $("#lastname").val();
+    var usrmail = $("#email").val();
+    create_user(client,usrname,psword,fsname,lsname,usrmail);
+    
+});
+
+}).catch(function (err) {
+    console.log("Unable to initialize the client: " + err);
+});
 
 $("#table-body").append(tableUser);
     </script>
