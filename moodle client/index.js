@@ -32,6 +32,7 @@ function delete_user(id) {
                 userids: [id]
             },
         }).then(function (info) {
+            $("#" + id).remove();
             console.log('User ' + id + ' deleted');
         })
     })
@@ -51,15 +52,16 @@ function get_all_user(client) {
         },
     }).then(function (info) {
         //console.log(info);
+        var tableUser;
         var arraylength = info.users.length;
         for (var i = 1; i < arraylength; i++) {
-            tableUser = tableUser + '<tr><td>' + info.users[i].id + '</td><td>' + info.users[i].username + '</td><td>' + info.users[i].fullname + '</td><td>' + info.users[i].email + '</td><td><a href="#" id="user-delete" onClick="delete_user(' + info.users[i].id + ')" value="' + info.users[i].id + '">Delete</a></td></tr>';
+            tableUser = tableUser + '<tr id="' + info.users[i].id + '"><td>' + info.users[i].id + '</td><td>' + info.users[i].username + '</td><td>' + info.users[i].fullname + '</td><td>' + info.users[i].email + '</td><td><a href="#" id="user-delete" onClick="delete_user(' + info.users[i].id + ')" value="' + info.users[i].id + '">Delete</a></td></tr>';
         };
 
         $("#table-body").append(tableUser);
     });
 }
-var tableUser;
+
 
 
 function do_otherthing(client) {
@@ -104,7 +106,7 @@ function do_something(client) {
 }
 
 
-function create_user(client,usrname,psword,fsname,lsname,usrmail) {
+function create_user(client, usrname, psword, fsname, lsname, usrmail) {
     client.call({
         wsfunction: "core_user_create_users",
         method: 'POST',
@@ -123,12 +125,14 @@ function create_user(client,usrname,psword,fsname,lsname,usrmail) {
         },
     }).then(function (info) {
         console.log(info);
-        
-        if(info[0].username != null){
-            console.log('Complete registering '+usrname)
+        if (info[0].username != null) {
+            console.log('Complete registering ' + usrname)
             $("#create-user").collapse('hide');
             $("input").val('');
+            $("tr").remove();
+            get_all_user(client);
+
         }
-        
+
     });
 }
