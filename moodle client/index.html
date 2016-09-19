@@ -32,7 +32,7 @@
         </div>
     </div>
     <div id="body" class="container-fluid">
-        <div id="manage-user">
+        <div id="manage-user" class="hide">
 
             <div>
                 <button id="add_user" data-toggle="collapse" data-target="#create-user" class="btn btn-primary">Add User</button>
@@ -147,7 +147,8 @@
             </div>
         </div>
     </div>
-    <script>
+<script>
+
 
 window.onload = function() {
     if (window.jQuery) {  
@@ -159,26 +160,6 @@ window.onload = function() {
     }
 }
 
-moodle_client.init({
-    wwwroot: "http://localhost/moodle/",
-    token: "e7c2eb02d743314e32b3764492004ef7",
-    service: "Administrator"
-
-}).then(function (client) {
-
-$("#register").click(function(){
-    var usrname = $("#username").val();
-    var psword = $("#password").val();
-    var fsname = $("#firstname").val();
-    var lsname = $("#lastname").val();
-    var usrmail = $("#email").val();
-    create_user(client,usrname,psword,fsname,lsname,usrmail);
-    
-});
-
-}).catch(function (err) {
-    console.log("Unable to initialize the client: " + err);
-});
 
     </script>
 </body>

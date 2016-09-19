@@ -3,14 +3,14 @@ var moodle_client = require("moodle-client");
 
 moodle_client.init({
     wwwroot: "http://localhost/moodle/",
-    token: "e7c2eb02d743314e32b3764492004ef7",
-    service: "Administrator"
+    username: "1111",
+    password: "Password123$"
 
 }).then(function (client) {
     console.log(client);
     //do_something(client);
-    //do_otherthing(client);
-    get_all_user(client);
+    do_otherthing(client);
+    //get_all_user(client);
 
 
 }).catch(function (err) {
@@ -21,8 +21,8 @@ moodle_client.init({
 function delete_user(id) {
     moodle_client.init({
         wwwroot: "http://localhost/moodle/",
-        token: "e7c2eb02d743314e32b3764492004ef7",
-        service: "Administrator"
+        username: "1111",
+        password: "Password123$"
 
     }).then(function (client) {
 
@@ -66,15 +66,9 @@ function get_all_user(client) {
 
 function do_otherthing(client) {
     client.call({
-        wsfunction: 'core_course_create_categories',
-        method: 'POST',
+        wsfunction: 'mod_quiz_get_quizzes_by_courses',
         args: {
-            categories: [{
-                name: 'Pendidikan',
-                parent: 0,
-                descriptionformat: 1
-            }]
-
+            courseids : [1]
         },
     }).then(function (info) {
         console.log(info);
@@ -83,26 +77,7 @@ function do_otherthing(client) {
 }
 
 function do_something(client) {
-    client.call({
-        wsfunction: "core_user_create_users",
-        method: 'POST',
-        args: {
-            users: [{
-                username: 'nani',
-                password: 'B1smillah..',
-                firstname: 'Nuna',
-                lastname: 'Narita',
-                email: 'nani@gmail.com',
-                auth: 'manual',
-                idnumber: '',
-                lang: 'en',
-                calendartype: 'gregorian'
-            }]
-        },
-    }).then(function (info) {
-        console.log(info);
 
-    });
 }
 
 
