@@ -62,8 +62,6 @@ function get_all_user(client) {
     });
 }
 
-
-
 function do_otherthing(client) {
     client.call({
         wsfunction: 'mod_quiz_get_quizzes_by_courses',
