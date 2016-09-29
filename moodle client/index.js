@@ -1,66 +1,27 @@
 
 var moodle_client = require("moodle-client");
+var http = require('http');
+http.post = require('http-post');
 
 moodle_client.init({
     wwwroot: "http://localhost/moodle/",
-    username: "1111",
-    password: "Password123$"
+    username: "siswa",
+    password: "Siswa123$"
 
 }).then(function (client) {
     console.log(client);
     //do_something(client);
-    do_otherthing(client);
+    //do_otherthing(client);
     //get_all_user(client);
-
+    get_quizzes_by_courses(client);
+    get_user_attempts(client);
+    get_attempt_data(client);
 
 }).catch(function (err) {
     console.log("Unable to initialize the client: " + err);
 });
 
 
-function delete_user(id) {
-    moodle_client.init({
-        wwwroot: "http://localhost/moodle/",
-        username: "1111",
-        password: "Password123$"
-
-    }).then(function (client) {
-
-        client.call({
-            wsfunction: 'core_user_delete_users',
-            args: {
-                userids: [id]
-            },
-        }).then(function (info) {
-            $("#" + id).remove();
-            console.log('User ' + id + ' deleted');
-        })
-    })
-}
-
-function get_all_user(client) {
-    client.call({
-        wsfunction: 'core_user_get_users',
-        args: {
-            criteria: [
-                {
-                    key: 'email',
-                    value: '%%'
-                }
-            ]
-
-        },
-    }).then(function (info) {
-        //console.log(info);
-        var tableUser;
-        var arraylength = info.users.length;
-        for (var i = 1; i < arraylength; i++) {
-            tableUser = tableUser + '<tr id="' + info.users[i].id + '"><td>' + info.users[i].id + '</td><td>' + info.users[i].username + '</td><td>' + info.users[i].fullname + '</td><td>' + info.users[i].email + '</td><td><a href="#" id="user-delete" onClick="delete_user(' + info.users[i].id + ')" value="' + info.users[i].id + '">Delete</a></td></tr>';
-        };
-
-        $("#table-body").append(tableUser);
-    });
-}
 
 function do_otherthing(client) {
     client.call({
@@ -73,7 +34,45 @@ function do_otherthing(client) {
 
     });
 }
+function get_attempt_data(client) {
+    client.call({
+        wsfunction: 'mod_quiz_get_attempt_data',
+        args: {
+            attemptid  : 12,
+            page : 3
+        },
+    }).then(function (info) {
+        console.log(info);
+        
+        $("#quiz").prepend(info.questions["0"].html);
 
+    });
+}
+
+function get_user_attempts(client) {
+    client.call({
+        wsfunction: 'mod_quiz_get_user_attempts',
+        args: {
+            quizid  : 2,
+            status : 'all'
+        },
+    }).then(function (info) {
+        console.log(info);
+
+    });
+}
+
+function get_quizzes_by_courses(client) {
+    client.call({
+        wsfunction: 'mod_quiz_get_quizzes_by_courses ',
+        args: {
+            courseids   : [1]
+        },
+    }).then(function (info) {
+        console.log(info);
+
+    });
+}
 function do_something(client) {
 
 }

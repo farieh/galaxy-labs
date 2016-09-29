@@ -114,6 +114,11 @@
             <div id="delete-user">
             </div>
         </div>
+        <div id="quiz">
+            <button id="login">Login</button>
+            <button id="answer">Answer</button>
+            <a href="http://localhost/moodle/">Link</a>
+        </div>
         <div id="manage-course">
             <div id="view-course">
             </div>
@@ -147,19 +152,71 @@
             </div>
         </div>
     </div>
-<script>
+    <ul class="url-list">
+        <li>
+            <a href="#http://nicesite.com">Nice site</a>
+        </li>
+        <li>
+            <a href="#http://awesomesite.com">Awesome site</a>
+        </li>
+        <li>
+            <a href="#http://prettysite.com">Pretty site</a>
+        </li>
+        <li>
+            <a href="#http://unknownsite.com">Unknown site</a>
+        </li>
+    </ul>
+    <iframe class="hide" name="loginframe"></iframe>
+    <form action="http://localhost/moodle/login/index.php" method="post" id="login" target="loginframe" class="hide">
+        <label for="username">Username : </label>
+        <input type="text" name="username" value="siswa"></input>
+        <label for="password">Password :</label>
+        <input type="text" name="password" value="Siswa123$"></input>
+        <input type="submit" name="loginbtn" value="Log in">
+    </form>
+    <script>
 
 
-window.onload = function() {
-    if (window.jQuery) {  
-        // jQuery is loaded  
-        console.log("Yeah! Jquery is work");
-    } else {
-        // jQuery is not loaded
-        console.log("JQuery Doesn't Work");
-    }
-}
 
+
+
+
+        function htmllogin(){
+        }
+        function htmlextract(){
+
+            }
+
+        window.onload = function() {
+            if (window.jQuery) {  
+                // jQuery is loaded  
+                console.log("Yeah! Jquery is work");
+            } else {
+                // jQuery is not loaded
+                console.log("JQuery Doesn't Work");
+            }
+        }
+
+        window.onload=function(){
+            var auto = setTimeout(function(){ autoRefresh(); }, 100);
+
+            function submitform(){
+            console.log('Loging In...');
+            document.forms["login"].submit();
+            }
+
+            function autoRefresh(){
+            clearTimeout(auto);
+            auto = setTimeout(function(){ submitform(); }, 1000);
+            }
+        }
+
+        $("#answer").click(function(){
+            htmlextract();
+        })
+        $("#login").click(function(){
+            htmllogin();
+        })
 
     </script>
 </body>
